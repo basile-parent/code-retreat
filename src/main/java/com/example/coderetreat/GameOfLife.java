@@ -17,6 +17,10 @@ public class GameOfLife {
     }
 
     public void step() {
+
+        Cellule[][] tmp_cells = new Cellule[cells.length][cells[0].length];
+
+
         for(int i = 0; i < cells.length; i++) {
             for(int j = 0; j < cells[i].length; j++) {
                 Cellule currentCell = this.cells[i][j];
@@ -29,40 +33,34 @@ public class GameOfLife {
                     if (nbAlives < 2) {
                         newIsAliveStatus = false;
                     }
+                } else {
+                    if (nbAlives == 3) {
+                        newIsAliveStatus = true;
+                    }
                 }
 
-                currentCell.setAlive(newIsAliveStatus);
+                tmp_cells[i][j] = new Cellule(newIsAliveStatus);
             }
         }
+
+        this.cells = tmp_cells;
     }
 
-    private Set<Cellule> getAdjacentCells(int i, int j) {
+    private Set<Cellule> getAdjacentCells(int row, int col) {
         Set<Cellule> adjacents = new HashSet<>();
 
-        if (i > 0) {
-            adjacents.add(this.cells[i-1][j]);
-            if (j > 0) {
-                adjacents.add(this.cells[i-1][j-1]);
-            }
-            if (j < this.cells[i].length - 1) {
-                adjacents.add(this.cells[i-1][j+1]);
-            }
-        }
-        if (i < this.cells.length - 1) {
-            adjacents.add(this.cells[i+1][j]);
-            if (j > 0) {
-                adjacents.add(this.cells[i+1][j-1]);
-            }
-            if (j < this.cells[i].length - 1) {
-                adjacents.add(this.cells[i+1][j+1]);
-            }
-        }
-        if (j > 0) {
-            adjacents.add(this.cells[i][j-1]);
-        }
-        if (j < this.cells[i].length - 1) {
-            adjacents.add(this.cells[i][j+1]);
-        }
+        if (col > 0)
+            adjacents.add(this.cells[row][col-1]);
+
+        if (row > 0)
+            adjacents.add(this.cells[row-1][col]);
+
+        if (col < this.cells[0].length - 1)
+            adjacents.add(this.cells[row][col+1]);
+
+        if(row < this.cells.length - 1)
+            adjacents.add(this.cells[row+1][col]);
+
 
         return adjacents;
     }
