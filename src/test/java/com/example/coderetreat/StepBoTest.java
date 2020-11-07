@@ -59,4 +59,24 @@ class StepBoTest {
         assertTrue(stepCells[1][1].isAlive());
     }
 
+    @Test
+    public void step_if_there_is_4_adjacents_cells_alive_a_cell_is_dead() {
+        // Given
+        // [ ][X] [X]
+        // [X][Xo][X]
+        GameOfLife gol = new GameOfLife(2, 3);
+        gol.setCell(0, 1, new Cellule(true));
+        gol.setCell(0, 2, new Cellule(true));
+        gol.setCell(1, 0, new Cellule(true));
+        gol.setCell(1, 1, new Cellule(true));
+        gol.setCell(1, 2, new Cellule(true));
+        StepBo stepBo = new StepBo();
+
+        // When
+        Cellule[][] stepCells = stepBo.step(gol.getCells());
+
+        // Then
+        assertFalse(stepCells[1][1].isAlive());
+    }
+
 }

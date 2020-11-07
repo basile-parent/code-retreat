@@ -9,7 +9,7 @@ public class StepBo {
     public Cellule[][] step(Cellule[][] cells) {
         Cellule[][] tmp_cells = new Cellule[cells.length][cells[0].length];
 
-        for(int i = 0; i < cells.length; i++) {
+        for (int i = 0; i < cells.length; i++) {
             calculateLine(cells, tmp_cells, i);
         }
 
@@ -17,7 +17,7 @@ public class StepBo {
     }
 
     private void calculateLine(Cellule[][] cells, Cellule[][] tmp_cells, int i) {
-        for(int j = 0; j < cells[i].length; j++) {
+        for (int j = 0; j < cells[i].length; j++) {
             calculateCell(cells, tmp_cells, i, j);
         }
     }
@@ -39,17 +39,14 @@ public class StepBo {
     }
 
     private boolean isDeadCellNowAlive(long nbAlives) {
-        if (nbAlives == 3) {
-            return true;
-        }
-        return false;
+        return nbAlives == 3;
     }
 
     private boolean isCellStillAlive(long nbAlives) {
         if (nbAlives < 2) {
             return false;
         }
-        return true;
+        return nbAlives <= 3;
     }
 
 }
