@@ -18,4 +18,19 @@ class GameOfLifeTest {
         assertEquals("[ ]\n", result);
     }
 
+    @Test
+    public void toString_should_return_a_string_representation_of_game_of_life_when_cell_is_alive() {
+        // Given
+        GameOfLife gol = new GameOfLife(1, 1);
+
+        Cellule cell = new Cellule(true);
+
+        gol.setCell(0, 0, cell);
+        // When
+        String result = gol.toString();
+
+        // Then
+        assertEquals("[X]\n", result);
+    }
+
 }

@@ -13,16 +13,20 @@ public class GameOfLife {
         }
     }
 
+    public void setCell(int row, int col, Cellule cell) {
+        this.cells[row][col] = cell;
+    }
+
     public String toString() {
+
         StringBuilder str = new StringBuilder("");
+
         for(int i = 0; i < cells.length; i++) {
             for(int j = 0; j < cells[i].length; j++) {
                 str.append(String.format("[%s]", cells[i][j]));
             }
             str.append("\n");
         }
-
         return str.toString();
     }
-
 }
